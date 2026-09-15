@@ -1,5 +1,16 @@
 # Redis operator on DOKS
 
+## Current status: shut down
+
+The user-requested shutdown completed on 2026-09-15. Redis was deleted through
+its operator finalizer, then the controller namespace and PVC, DOKS cluster and
+worker, task firewalls, and registry were removed. The registry subscription
+no longer exists. Verified evidence: [shutdown.json](evidence/shutdown.json).
+
+R2 buckets `doks-state`, `redis-state`, and `redis-backup` were retained and
+remain accessible. Stored objects may continue to incur R2 storage charges.
+The environment described below is the historical deployment, not a running service.
+
 ## Repositories
 
 - [Plan](https://github.com/getcolors/redis-doks/blob/main/PLAN.md)
@@ -8,7 +19,7 @@
 - [Redis operator](https://github.com/getcolors/redis-operator)
 - [Deployment commands](https://github.com/getcolors/redis-doks/blob/main/README.md) (private)
 
-## Live environment
+## Verified environment before shutdown
 
 - DOKS cluster: `colors-doks-dev-20260915`, ID `a87775cd-de9f-4390-8dee-281f864bc9de`.
 - Region/version: `ams3`, `1.36.3-do.5`.
@@ -84,9 +95,9 @@ and [native image test](evidence/native-image-test.json).
 
 ## Cleanup
 
-Keep the live deployment for inspection. It continues to incur charges for the
-DOKS worker, Redis Droplet, persistent volume, and registry. R2 storage may also
-incur charges. Deleting the Redis custom resource with `Retain` leaves its Droplet.
+These cleanup steps were completed on 2026-09-15. They are retained as a runbook
+for a future deployment. Deleting the Redis custom resource with `Retain` would
+leave its Droplet; the shutdown explicitly selected `Destroy`.
 
 From this repository, with the refreshed private kubeconfig:
 

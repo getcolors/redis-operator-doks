@@ -1,5 +1,9 @@
 # Redis on Droplets, managed from DOKS
 
+The demonstration deployment was shut down on 2026-09-15. R2 state and backups
+were retained. See [HANDOFF.md](HANDOFF.md) for verified shutdown details; the
+commands below describe provisioning a deployment, not a currently running service.
+
 This private deployment repository installs `redis-operator` in an existing
 DOKS cluster. The controller runs Green workflows to provision Redis on a
 separate DigitalOcean Droplet. DOKS provisioning belongs to `doks-dev`.

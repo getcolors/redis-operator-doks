@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-09-15T17:11:14.022488+00:00",
+  "redisDropletDeleted": "600730033",
+  "redisResourceFinalizerCompleted": true,
+  "controllerNamespaceDeleted": "colors-redis",
+  "controllerVolumeDeleted": "5d73f681-b11e-11f1-bd40-4603b626b566",
+  "doksClusterDeleted": "a87775cd-de9f-4390-8dee-281f864bc9de",
+  "doksWorkerDeleted": "600715804",
+  "taskFirewallsDeleted": true,
+  "registryDeleted": "colors-redis-20260915",
+  "registrySubscriptionAbsent": true,
+  "retainedR2Buckets": [
+    "doks-state",
+    "redis-state",
+    "redis-backup"
+  ],
+  "retainedBucketsHeadChecksPassed": true,
+  "passed": true
+}

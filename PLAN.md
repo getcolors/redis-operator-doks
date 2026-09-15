@@ -91,3 +91,9 @@ that the operator detects its absence and restores a healthy Redis service.
   Authenticated reads/writes passed; the pre-deletion marker was lost as expected.
 - Backup rehearsal and graceful controller restart passed with persisted SSH keys.
 - Final evidence and cleanup instructions are in [HANDOFF.md](HANDOFF.md).
+
+## Subsequent shutdown
+
+On 2026-09-15 the user requested shutdown. The live infrastructure and registry
+were removed, and the three R2 buckets were retained. See
+[evidence/shutdown.json](evidence/shutdown.json) and the updated handoff.
