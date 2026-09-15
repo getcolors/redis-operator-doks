@@ -43,7 +43,6 @@ def main():
     cli.add_argument("--timeout", type=int, default=2400)
     cli.add_argument("--delete-owned-droplet", action="store_true", required=True,
                      help="Required acknowledgement of this script's destructive test")
-    cli.add_argument("--rehearse", action="store_true")
     cli.add_argument("--evidence", default=str(ROOT / "evidence" / "self-healing.json"))
     args = cli.parse_args()
     kube = Kubernetes(args)
@@ -90,10 +89,6 @@ def main():
             evidence["authenticatedWriteReadPassed"] = kube.probe("set-marker", marker_key, recovered_value).get("marker") == recovered_value
             if not evidence["authenticatedWriteReadPassed"]:
                 raise ValueError("Replacement write/read failed")
-            if args.rehearse:
-                evidence["backupRehearsal"] = kube.probe("rehearse")
-                if not evidence["backupRehearsal"].get("rehearsalPassed"):
-                    raise ValueError("Backup rehearsal failed")
             evidence["passed"] = True
             write_evidence(args.evidence, evidence)
             print("Service recovery verified; evidence: " + args.evidence)

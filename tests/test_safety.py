@@ -7,6 +7,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from common import private_environment
 from self_heal import owned_droplet, ready
+from rehearse import acknowledged_suspension
 
 
 class SafetyTests(unittest.TestCase):
@@ -33,6 +34,14 @@ class SafetyTests(unittest.TestCase):
         self.assertFalse(ready(cr))
         cr["status"]["observedGeneration"] = 2
         self.assertTrue(ready(cr))
+
+    def test_suspend_request_alone_does_not_authorize_rehearsal(self):
+        cr = {"metadata": {"generation": 2}, "spec": {"suspend": True}, "status": {"observedGeneration": 1, "phase": "Suspended"}}
+        self.assertFalse(acknowledged_suspension(cr))
+        cr["status"]["observedGeneration"] = 2
+        self.assertTrue(acknowledged_suspension(cr))
+        cr["metadata"]["deletionTimestamp"] = "now"
+        self.assertFalse(acknowledged_suspension(cr))
 
 
 if __name__ == "__main__":

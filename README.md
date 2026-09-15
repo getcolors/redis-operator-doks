@@ -66,7 +66,7 @@ python3 scripts/self_heal.py \
   --kubeconfig ../doks-dev/.colors/doks-dev/cluster/kubeconfig \
   --context do-ams3-colors-doks-dev-20260915 \
   --cluster-id a87775cd-de9f-4390-8dee-281f864bc9de \
-  --delete-owned-droplet --rehearse
+  --delete-owned-droplet
 ```
 
 The script writes and reads a unique marker using authenticated Redis commands,
@@ -77,15 +77,36 @@ generation to remain unchanged. There is no manual convergence request.
 
 Evidence is saved incrementally to `evidence/self-healing.json`. It contains
 resource IDs, timestamps, and a synthetic test marker, never credentials or
-Terraform state. `--rehearse` invokes the Redis package's existing backup
-rehearsal and records success. Rehearsal makes a fresh completed backup set,
-then verifies it restores into a scratch Redis container.
+Terraform state. Run backup rehearsal separately after service recovery, as described below.
 
 **This tests service recovery, not restoration of previous data.** The current
 package initializes a new host and does not automatically restore an earlier
 backup. The pre-deletion marker is expected to be absent after recovery. Older
 backup sets remain available subject to retention; the replacement also writes
 new timestamped sets. The replacement host generates a new Redis password.
+
+## Backup rehearsal
+
+```bash
+python3 scripts/rehearse.py \
+  --kubeconfig ../doks-dev/.colors/doks-dev/cluster/kubeconfig \
+  --context do-ams3-colors-doks-dev-20260915
+```
+
+The script suspends the custom resource and waits until the controller reports
+`Suspended` for the new generation. This acknowledgement means the previous
+convergence finished. It then invokes the existing Redis backup rehearsal,
+which creates a fresh completed backup set and restores it into a scratch
+container. The probe independently requires acknowledged suspension before it
+runs the mutating workflow. A `finally` block resumes management after success
+or a completed failure. The script leaves suspension intact if remote execution
+completion is uncertain or another actor changes the resource; verify that no
+workflow is running before manually resuming in those cases.
+
+Evidence goes to `evidence/backup-rehearsal.json`. Do not run rehearsal probes
+directly while convergence is active. Suspension is intended for this single
+controller development setup; it does not coordinate independent human or CI
+runners.
 
 ## Controller restart test
 
@@ -108,7 +129,7 @@ compute operations; it does not cover the complete Redis Ansible workflow.
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 -m py_compile scripts/common.py scripts/install.py scripts/self_heal.py scripts/restart.py
+python3 -m py_compile scripts/common.py scripts/install.py scripts/self_heal.py scripts/restart.py scripts/rehearse.py
 ```
 
 These checks use no cloud credentials and make no cloud changes.
