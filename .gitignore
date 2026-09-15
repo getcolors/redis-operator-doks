@@ -1,0 +1,11 @@
+.envrc.private
+.envrc.private.*
+.colors/
+.kube/
+*.tfstate*
+*.tfplan
+*.pem
+*.key
+.terraform/
+.cpcache/
+__pycache__/
