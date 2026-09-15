@@ -29,7 +29,8 @@ that the operator detects its absence and restores a healthy Redis service.
   credential sets from the workspace's private environment file. Never commit
   credentials, kubeconfigs, Terraform state, SSH private keys, or registry tokens.
 - Use remote infrastructure state and a persistent controller volume for SSH
-  keys, generated files, and package caches. Restart the controller gracefully;
+  keys and generated workflow files. Dependency caches are downloaded again
+  when a new pod starts. Restart the controller gracefully;
   no distributed failover or forced takeover of an uncertain workflow.
 - The CRD exposes `deletionPolicy`, defaulting to Retain. Package destruction
   protection stays enabled during convergence. Only an explicit Destroy deletion
@@ -82,4 +83,11 @@ that the operator detects its absence and restores a healthy Redis service.
 
 - Existing Green, Redis, and colors-compute repositories synchronized to main.
 - Four new repositories created; deployment repositories are private.
-- Implementation and live verification are in progress.
+- All four repositories implemented, tested, committed, and pushed to main.
+- All three R2 credential sets passed temporary-object write/read/delete checks.
+- DOKS cluster provisioned and verified; the pinned image passed native AMD64 tests.
+- Redis provisioned from the controller, then its owned Droplet was deleted by API.
+- Autonomous replacement passed in 5 minutes 46 seconds without changing the resource.
+  Authenticated reads/writes passed; the pre-deletion marker was lost as expected.
+- Backup rehearsal and graceful controller restart passed with persisted SSH keys.
+- Final evidence and cleanup instructions are in [HANDOFF.md](HANDOFF.md).

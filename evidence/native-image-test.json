@@ -1,0 +1,10 @@
+{
+  "image": "registry.digitalocean.com/colors-redis-20260915/redis-operator@sha256:659414485f9686a7854cda8596a3cafa6ebf99862f4373422d1469524bb2d7b7",
+  "platform": "linux/amd64",
+  "pod": "colors-redis/redis-operator-native-test",
+  "tests": 8,
+  "assertions": 50,
+  "failures": 0,
+  "errors": 0,
+  "phase": "Succeeded"
+}

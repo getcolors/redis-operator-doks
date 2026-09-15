@@ -1,0 +1,40 @@
+{
+  "verifiedAt": "2026-09-15T16:19:22.425240+00:00",
+  "clusterId": "a87775cd-de9f-4390-8dee-281f864bc9de",
+  "namespace": "colors-redis",
+  "resourceUID": "980b8bf0-7801-4cc7-bf4a-e1325d68dfee",
+  "generation": 5,
+  "phase": "Ready",
+  "droplets": [
+    {
+      "id": 600715804,
+      "name": "colors-doks-dev-20260915-workers-3fig5l",
+      "status": "active",
+      "size": "s-2vcpu-4gb"
+    },
+    {
+      "id": 600724611,
+      "name": "redis-doks-20260915",
+      "status": "active",
+      "size": "s-1vcpu-2gb"
+    }
+  ],
+  "controllerPods": [
+    {
+      "name": "colors-redis-operator-748ffbb7d5-52mgm",
+      "phase": "Running",
+      "images": [
+        "registry.digitalocean.com/colors-redis-20260915/redis-operator@sha256:659414485f9686a7854cda8596a3cafa6ebf99862f4373422d1469524bb2d7b7"
+      ]
+    }
+  ],
+  "persistentVolumes": [
+    {
+      "name": "pvc-974204db-ca59-4130-9e29-54c1aa30bd74",
+      "volumeId": "5d73f681-b11e-11f1-bd40-4603b626b566",
+      "capacity": {
+        "storage": "5Gi"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-15",
+  "digitaloceanAccountActive": true,
+  "dropletsBeforeTask": 0,
+  "clustersBeforeTask": 0,
+  "registryBeforeTask": null,
+  "r2TemporaryObjectChecks": {
+    "doks-state": {"put": true, "get": true, "delete": true},
+    "redis-state": {"put": true, "get": true, "delete": true},
+    "redis-backup": {"put": true, "get": true, "delete": true}
+  },
+  "probePrefix": "colors-validation/redis-doks-",
+  "probeObjectsRemoved": true,
+  "notes": "Only temporary randomized probe objects were changed. No credential values are recorded."
+}

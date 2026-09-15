@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-09-15T16:07:43.536083+00:00",
+  "clusterId": "a87775cd-de9f-4390-8dee-281f864bc9de",
+  "resourceUID": "980b8bf0-7801-4cc7-bf4a-e1325d68dfee",
+  "generation": 3,
+  "before": {
+    "providerId": "600721546",
+    "name": "redis-doks-20260915",
+    "ip": "165.22.198.189",
+    "profile": "redis-doks-20260915",
+    "convergenceRecordModifiedMs": 1789488257741,
+    "healthy": true
+  },
+  "excludedWorkerIds": [
+    "600715804"
+  ],
+  "markerKey": "colors:self-heal:11733170ca5f4c8b817c4dd2150185ee",
+  "markerValue": "ccc23a88a195478cb46c0d1550869b65",
+  "expectedDataRecovery": false,
+  "deleteAcceptedAt": "2026-09-15T16:07:44.513815+00:00",
+  "recoveredAt": "2026-09-15T16:13:30.555709+00:00",
+  "after": {
+    "providerId": "600724611",
+    "name": "redis-doks-20260915",
+    "ip": "206.189.110.180",
+    "profile": "redis-doks-20260915",
+    "convergenceRecordModifiedMs": 1789488778219,
+    "healthy": true
+  },
+  "priorMarkerSurvived": false,
+  "authenticatedWriteReadPassed": true,
+  "passed": true
+}

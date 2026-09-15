@@ -26,6 +26,21 @@ only Python's standard library.
 
 ## Install
 
+Registry bootstrap uses Python `requests` and operates only the task registry
+`colors-redis-20260915`. The following commands create the registry if absent,
+write private short-lived Docker credentials, and enable DOKS-managed pull Secrets:
+
+```bash
+python3 scripts/registry.py ensure
+python3 scripts/registry.py credentials
+python3 scripts/registry.py integrate --cluster-id a87775cd-de9f-4390-8dee-281f864bc9de
+```
+
+The default auth directory is `/tmp/colors-redis-registry`; push credentials expire
+in one hour. Use `docker --config /tmp/colors-redis-registry/push` to publish the
+image from the operator repository. Keep those files outside Git. Native DOKS
+integration supplies the `colors-redis-20260915` pull Secret in new namespaces.
+
 Build and publish the image using the `redis-operator` repository, then record
 its immutable digest. Install with explicit cluster targeting:
 
@@ -34,14 +49,14 @@ python3 scripts/install.py \
   --kubeconfig ../doks-dev/.colors/doks-dev/cluster/kubeconfig \
   --context do-ams3-colors-doks-dev-20260915 \
   --image registry.digitalocean.com/colors-redis-20260915/redis-operator@sha256:IMAGE_DIGEST \
-  --registry-secret EXISTING_DOKS_REGISTRY_SECRET \
+  --registry-secret colors-redis-20260915 \
   --ssh-source 209.38.46.78/32 \
   --ssh-source 89.168.97.254/32
 ```
 
 Alternatively use `--registry-config /private/path/config.json` to create a
 pull Secret. Native DOKS registry integration is preferred for credential
-rotation. The existing secret must already be in `colors-redis`.
+rotation. The installer waits up to two minutes for the managed secret in `colors-redis`.
 
 The installer parses literal assignments from the workspace `.envrc.private`
 without executing it. It copies only five DigitalOcean, state, and backup

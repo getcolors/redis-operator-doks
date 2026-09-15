@@ -1,0 +1,23 @@
+{
+  "startedAt": "2026-09-15T16:17:13.148355+00:00",
+  "before": {
+    "providerId": "600724611",
+    "name": "redis-doks-20260915",
+    "ip": "206.189.110.180",
+    "profile": "redis-doks-20260915",
+    "convergenceRecordModifiedMs": 1789488778219,
+    "healthy": true
+  },
+  "resourceUID": "980b8bf0-7801-4cc7-bf4a-e1325d68dfee",
+  "generation": 5,
+  "passed": true,
+  "after": {
+    "providerId": "600724611",
+    "name": "redis-doks-20260915",
+    "ip": "206.189.110.180",
+    "profile": "redis-doks-20260915",
+    "convergenceRecordModifiedMs": 1789488778219,
+    "healthy": true
+  },
+  "completedAt": "2026-09-15T16:18:17.908559+00:00"
+}
