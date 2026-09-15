@@ -1,0 +1,36 @@
+{
+  "apiVersion": "colors.getcolors.ai/v1alpha1",
+  "kind": "RedisDeployment",
+  "metadata": {
+    "name": "redis-dev",
+    "namespace": "colors-redis"
+  },
+  "spec": {
+    "state": "running",
+    "deletionPolicy": "Retain",
+    "suspend": false,
+    "config": {
+      "profile": "redis-doks-20260915",
+      "provider-compute": "digitalocean",
+      "provider-backend": "r2",
+      "redis-image": "docker.io/library/redis:7.2.16@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b",
+      "redis-port": 6379,
+      "redis-backup-r2-bucket": "redis-backup",
+      "redis-backup-r2-endpoint": "https://319271fed8bc6d2d9059362be1165f37.eu.r2.cloudflarestorage.com",
+      "redis-backup-r2-region": "auto",
+      "redis-backup-oncalendar": "*-*-* 00/6:00:00",
+      "redis-backup-retention-days": 7,
+      "redis-backup-max-age-hours": 8,
+      "digitalocean-region": "ams3",
+      "digitalocean-size": "s-1vcpu-2gb",
+      "digitalocean-image": "ubuntu-24-04-x64",
+      "digitalocean-ssh-sources": [
+        "209.38.46.78/32",
+        "89.168.97.254/32"
+      ],
+      "r2-bucket": "redis-state",
+      "r2-endpoint": "https://319271fed8bc6d2d9059362be1165f37.eu.r2.cloudflarestorage.com"
+    },
+    "reconcileInterval": "30s"
+  }
+}
