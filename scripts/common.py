@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import shlex
 import subprocess
+import time
 import urllib.error
 import urllib.request
 
@@ -14,6 +15,28 @@ CREDENTIALS = (
     "COLORS_PAR_R2_SECRET_ACCESS_KEY", "COLORS_PAR_REDIS_BACKUP_R2_ACCESS_KEY_ID",
     "COLORS_PAR_REDIS_BACKUP_R2_SECRET_ACCESS_KEY",
 )
+
+
+def ready(resource):
+    generation = resource["metadata"]["generation"]
+    status = resource.get("status", {})
+    return status.get("observedGeneration") == generation and any(
+        condition.get("type") == "Ready" and condition.get("status") == "True"
+        for condition in status.get("conditions", []))
+
+
+def wait_active_ready(kube, timeout=600):
+    """Wait through routine reconciliation, but never override suspension/deletion."""
+    deadline = time.monotonic() + timeout
+    while True:
+        resource = kube.resource()
+        if resource.get("spec", {}).get("suspend") or resource["metadata"].get("deletionTimestamp"):
+            raise ValueError("Resource must be active and unsuspended")
+        if ready(resource):
+            return resource
+        if time.monotonic() >= deadline:
+            raise RuntimeError("Timed out waiting for current-generation Ready status")
+        time.sleep(min(2, max(0, deadline - time.monotonic())))
 
 
 def private_environment(path):

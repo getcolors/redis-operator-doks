@@ -5,8 +5,7 @@ import json
 import subprocess
 import sys
 import time
-from common import ROOT, Kubernetes, parser, write_evidence
-from self_heal import ready
+from common import ROOT, Kubernetes, parser, write_evidence, wait_active_ready
 
 
 def acknowledged_suspension(resource):
@@ -30,9 +29,7 @@ def main():
     cli.add_argument("--evidence", default=str(ROOT / "evidence" / "backup-rehearsal.json"))
     args = cli.parse_args()
     kube = Kubernetes(args)
-    original = kube.resource()
-    if original["spec"].get("suspend") or original["metadata"].get("deletionTimestamp") or not ready(original):
-        raise ValueError("Backup rehearsal requires an active Ready resource")
+    original = wait_active_ready(kube)
     evidence = {"startedAt": datetime.now(timezone.utc).isoformat(),
                 "resourceUID": original["metadata"]["uid"], "passed": False}
     write_evidence(args.evidence, evidence)

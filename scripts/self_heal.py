@@ -6,19 +6,11 @@ import re
 import sys
 import time
 import uuid
-from common import ROOT, Kubernetes, digitalocean, parser, private_environment, write_evidence
+from common import ROOT, Kubernetes, digitalocean, parser, private_environment, write_evidence, ready, wait_active_ready
 
 
 def now():
     return datetime.now(timezone.utc).isoformat()
-
-
-def ready(resource):
-    generation = resource["metadata"]["generation"]
-    status = resource.get("status", {})
-    return status.get("observedGeneration") == generation and any(
-        condition.get("type") == "Ready" and condition.get("status") == "True"
-        for condition in status.get("conditions", []))
 
 
 def owned_droplet(droplet, probe, profile, workers):
@@ -47,9 +39,7 @@ def main():
     args = cli.parse_args()
     kube = Kubernetes(args)
     token = private_environment(args.private_env)["COLORS_PAR_DO_TOKEN"]
-    cr = kube.resource()
-    if cr["spec"].get("suspend") or cr["metadata"].get("deletionTimestamp") or not ready(cr):
-        raise ValueError("Resource must be active, unsuspended and Ready before disruption")
+    cr = wait_active_ready(kube)
     before = kube.probe("health")
     if not before.get("healthy"):
         raise ValueError("Redis must be healthy before disruption")

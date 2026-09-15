@@ -4,8 +4,7 @@ from datetime import datetime, timezone
 import json
 import sys
 import time
-from common import ROOT, Kubernetes, parser, write_evidence
-from self_heal import ready
+from common import ROOT, Kubernetes, parser, write_evidence, ready, wait_active_ready
 
 
 def main():
@@ -13,9 +12,7 @@ def main():
     cli.add_argument("--evidence", default=str(ROOT / "evidence" / "controller-restart.json"))
     args = cli.parse_args()
     kube = Kubernetes(args)
-    cr = kube.resource()
-    if not ready(cr) or cr["spec"].get("suspend") or cr["metadata"].get("deletionTimestamp"):
-        raise ValueError("Restart test requires an active Ready deployment")
+    cr = wait_active_ready(kube)
     before = kube.probe("health")
     if not before.get("healthy"):
         raise ValueError("Redis is unhealthy")
@@ -40,7 +37,8 @@ def main():
     kube.run("rollout", "status", "deployment/" + args.deployment, "-n", args.namespace, "--timeout=600s", timeout=630)
     # Allow the restarted controller to observe at least one scheduled reconciliation.
     time.sleep(45)
-    after, current = kube.probe("health"), kube.resource()
+    current = wait_active_ready(kube)
+    after = kube.probe("health")
     if not after.get("healthy") or before["providerId"] != after["providerId"] or not ready(current):
         raise RuntimeError("Restart did not preserve healthy infrastructure")
     if not before.get("convergenceRecordModifiedMs") or before["convergenceRecordModifiedMs"] != after.get("convergenceRecordModifiedMs"):
