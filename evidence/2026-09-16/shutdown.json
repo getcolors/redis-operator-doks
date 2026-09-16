@@ -1,0 +1,35 @@
+{
+  "completedAt": "2026-09-16T08:14:03Z",
+  "redisOperatorDoks": {
+    "deletionPolicyPatched": "Destroy",
+    "redisDropletDeleted": 600968621,
+    "finalizerCompleted": true,
+    "namespaceDeleted": "colors-redis",
+    "crdDeleted": "redisdeployments.colors.getcolors.ai",
+    "computeJournal": "retired"
+  },
+  "doksDev": {
+    "registryIntegrationRemoved": true,
+    "clusterDeleted": "2e927b38-90a5-4d73-98af-d974f9fe9fd1",
+    "registryDeleted": "doks-dev",
+    "workerDropletDeletedAsynchronouslyByDigitalOcean": 600945297,
+    "clusterFirewallsDeletedAsynchronously": [
+      "k8s-2e927b38-90a5-4d73-98af-d974f9fe9fd1-worker",
+      "k8s-public-access-2e927b38-90a5-4d73-98af-d974f9fe9fd1"
+    ],
+    "cleanupStepFailedOnNonEmptyDirectory": true
+  },
+  "accountAfter": {
+    "droplets": 0,
+    "kubernetesClusters": 0,
+    "firewalls": 0,
+    "registry": "absent",
+    "sshKeysNamedAfterProfiles": 0
+  },
+  "retainedR2Buckets": [
+    "doks-state",
+    "redis-state",
+    "redis-backup"
+  ],
+  "passed": true
+}

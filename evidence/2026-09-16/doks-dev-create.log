@@ -1,0 +1,9 @@
+>>> :doks/start (create)
+<<< :doks/start (1ms)
+>>> :doks/infrastructure (create)
+<<< :doks/infrastructure (355888ms)
+>>> :doks/registry (create)
+<<< :doks/registry (19176ms)
+>>> :doks/registry-link (create)
+registry doks-dev integrated with cluster 2e927b38-90a5-4d73-98af-d974f9fe9fd1
+<<< :doks/registry-link (1174ms)

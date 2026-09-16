@@ -1,0 +1,14 @@
+>>> :redis-operator/start (delete)
+<<< :redis-operator/start (1ms)
+>>> :redis-operator/destroy (delete)
+redis-operator: patched deletionPolicy=Destroy
+redis-operator: finalizing phase=Ready reason=Converged generation=5 observed=3 deleting=true
+redis-operator: finalizing phase=Deleting reason=Deleting generation=5 observed=5 deleting=true
+redis-operator: RedisDeployment removed after finalization
+<<< :redis-operator/destroy (107363ms)
+>>> :redis-operator/namespace-delete (delete)
+redis-operator: namespace removed colors-redis
+<<< :redis-operator/namespace-delete (15806ms)
+>>> :redis-operator/crd-delete (delete)
+redis-operator: CRD removed redisdeployments.colors.getcolors.ai
+<<< :redis-operator/crd-delete (783ms)

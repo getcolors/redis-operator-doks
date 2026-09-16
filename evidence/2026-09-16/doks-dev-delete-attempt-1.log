@@ -1,0 +1,15 @@
+>>> :doks/start (delete)
+<<< :doks/start (1ms)
+>>> :doks/load (delete)
+<<< :doks/load (6783ms)
+>>> :doks/registry-unlink (delete)
+registry integration removed from cluster 2e927b38-90a5-4d73-98af-d974f9fe9fd1
+<<< :doks/registry-unlink (560ms)
+>>> :doks/infrastructure (delete)
+<<< :doks/infrastructure (15562ms)
+>>> :doks/registry (delete)
+<<< :doks/registry (4485ms)
+>>> :doks/cleanup (delete)
+/home/ubuntu/code/getcolors/doks-dev/./.colors/doks-dev/registry/push
+java.nio.file.DirectoryNotEmptyException: /home/ubuntu/code/getcolors/doks-dev/./.colors/doks-dev/registry/push
+
