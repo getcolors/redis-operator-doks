@@ -1,0 +1,17 @@
+>>> :doks/start (delete)
+<<< :doks/start (2ms)
+>>> :doks/load (delete)
+<<< :doks/load (1030ms)
+>>> :doks/registry-unlink (delete)
+no registry integration to remove
+<<< :doks/registry-unlink (0ms)
+>>> :doks/infrastructure (delete)
+cluster already absent; nothing to destroy
+<<< :doks/infrastructure (0ms)
+>>> :doks/registry (delete)
+registry doks-dev destroyed
+<<< :doks/registry (1447ms)
+>>> :doks/cleanup (delete)
+cleanup done: removed /home/ubuntu/code/getcolors/doks-dev/./.colors/doks-dev/kubeconfig and /home/ubuntu/code/getcolors/doks-dev/./.colors/doks-dev/registry
+delete complete for doks-dev; the provider removes worker machines and cluster firewalls asynchronously over the next minutes, and check is expected to fail from now on
+<<< :doks/cleanup (1ms)

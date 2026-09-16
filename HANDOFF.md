@@ -17,9 +17,9 @@ backup sets); they are the only remaining billable items.
 
 | Repository | Result | Final SHA |
 |---|---|---|
-| [`doks`](https://github.com/getcolors/doks) | Green-only Package Skill `package-doks-green` on colors-compute's `managed-kubernetes` kind (DigitalOcean and Vultr advertised), optional deployment-owned registry with DOKS integration, verbs `build create check kubeconfig registry delete`; 36 tests, two goldens, launcher check | `3f65ed2` (launcher pin `d246db4`) |
-| [`doks-dev`](https://github.com/getcolors/doks-dev) | conventional deployment: installed payload + `skills-lock.json`, devenv, per-deployment private env, default-deny `.gitignore`; cluster `doks-dev` + registry `doks-dev` | `c84fd30` |
-| [`redis-operator`](https://github.com/getcolors/redis-operator) | Package Skill `package-redis-operator-green` beside the controller image source; verbs `build create check rehearse drill restart delete`; the Python installer and drills ported to tested Clojure; 43 tests, golden, launcher check | `cb2b5f3` (launcher pin `7723970`) |
+| [`doks`](https://github.com/getcolors/doks) | Green-only Package Skill `package-doks-green` on colors-compute's `managed-kubernetes` kind (DigitalOcean and Vultr advertised), optional deployment-owned registry with DOKS integration, verbs `build create check kubeconfig registry delete`; 36 tests, two goldens, launcher check | `49c5b2e` (launcher pin `41e12fc`) |
+| [`doks-dev`](https://github.com/getcolors/doks-dev) | conventional deployment: installed payload + `skills-lock.json`, devenv, per-deployment private env, default-deny `.gitignore`; cluster `doks-dev` + registry `doks-dev` | see `git log` |
+| [`redis-operator`](https://github.com/getcolors/redis-operator) | Package Skill `package-redis-operator-green` beside the controller image source; verbs `build create check rehearse drill restart delete`; the Python installer and drills ported to tested Clojure; 43 tests, golden, launcher check | `e9fe076` (launcher pin `5f37868`) |
 | `redis-operator-doks` (this repo) | conventional deployment, renamed from `redis-doks`; `colors.yml` renders the RedisDeployment; evidence under `evidence/2026-09-16/` | see `git log` |
 | [`workspace`](https://github.com/getcolors/workspace) | the four repositories added to the map and `repositories.json` | `542c858` |
 
@@ -87,6 +87,8 @@ Pins: green `215e298`, redis `ec260f5`, colors-compute `7e1c234` (bumped from
    `/root/.deps.clj`, `/app/.cpcache` live on the PVC.
 4. `patch-resource!` retries a resourceVersion race caused by status writes,
    refuses when `spec` or `deletionTimestamp` changed.
+5. `doks` delete cleanup reports leftovers and each stage; `image.sh` keeps
+   root-owned docker state out of `.colors/`.
 
 ## Open items (not fixed here)
 
@@ -130,8 +132,16 @@ Verified at 08:14 UTC on 2026-09-16 ([shutdown.json](evidence/2026-09-16/shutdow
    Droplet `600945297` and the two `k8s-<cluster-id>-*` firewalls
    asynchronously about four minutes later. The package's final cleanup step
    then failed on a non-empty `registry/push` directory
-   ([doks-dev-delete-attempt-1.log](evidence/2026-09-16/doks-dev-delete-attempt-1.log));
-   nothing billable was affected, and the package fix is recorded below.
+   ([doks-dev-delete-attempt-1.log](evidence/2026-09-16/doks-dev-delete-attempt-1.log)):
+   the image build had run docker as root with that directory as its config
+   and left a root-owned `buildx/` subtree. Nothing billable was affected.
+   Fixed twice over: `doks` now reports leftovers instead of throwing and
+   prints one line per delete stage, and `redis-operator/scripts/image.sh`
+   builds from a private temp config directory. A second `delete` on the
+   destroyed deployment completed every stage and the cleanup
+   ([doks-dev-delete-attempt-2.log](evidence/2026-09-16/doks-dev-delete-attempt-2.log));
+   its "registry destroyed" line on an already-empty registry state is
+   cosmetic.
 3. Account after: 0 Droplets, 0 clusters, 0 firewalls, no registry, no
    profile-named SSH keys.
 

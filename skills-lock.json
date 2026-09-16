@@ -5,7 +5,7 @@
       "source": "getcolors/redis-operator",
       "sourceType": "github",
       "skillPath": "skills/package-redis-operator-green/SKILL.md",
-      "computedHash": "528ef6248f0d9f8af211f7287ff22ab57d0b68648ccd2479fc1e9eec5d2f356b"
+      "computedHash": "1a6e1a2cbceb9a1299dc4995afd9542ebf408faedb688c7826f2c4450dad1724"
     }
   }
 }
