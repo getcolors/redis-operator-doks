@@ -1,0 +1,10 @@
+>>> :redis-operator/start (check)
+<<< :redis-operator/start (1ms)
+>>> :redis-operator/check (check)
+redis-operator: waiting phase=Ready reason=Converged generation=3 observed=3
+redis-operator: controller pod=colors-redis-operator-5f57c9b5bd-89mm4 started=2026-09-16T08:02:48Z still starting
+redis-operator: controller up pod=colors-redis-operator-5f57c9b5bd-89mm4 started=2026-09-16T08:02:48Z
+redis-operator: check phase=Ready reason=Converged generation=3 observed=3
+redis-operator: check provider-id=600968621 name=redis-operator-doks ip=161.35.157.65 profile=redis-operator-doks healthy=true
+redis-operator: check failures retained: 0 
+<<< :redis-operator/check (19995ms)

@@ -1,0 +1,5 @@
+>>> :redis-operator/start (delete)
+<<< :redis-operator/start (1ms)
+>>> :redis-operator/destroy (delete)
+<<< :redis-operator/destroy (780ms)
+kubectl patch redisdeployments.colors.getcolors.ai failed (exit 1): The request is invalid: the server rejected our request due to an error in our request

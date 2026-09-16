@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-16",
+  "clusterId": "2e927b38-90a5-4d73-98af-d974f9fe9fd1",
+  "clusterName": "doks-dev",
+  "region": "ams3",
+  "doksVersion": "1.36.3-do.5",
+  "worker": {
+    "name": "doks-dev-3fd5ld",
+    "dropletId": 600945297,
+    "publicIp": "134.209.92.109"
+  },
+  "registry": "registry.digitalocean.com/doks-dev",
+  "doksDev": {
+    "createSeconds": {
+      "infrastructure": 356,
+      "registry": 19,
+      "registryLink": 1
+    },
+    "idempotentCreateSeconds": {
+      "infrastructure": 13,
+      "registry": 2
+    },
+    "checkPassed": true
+  },
+  "images": [
+    {
+      "digest": "sha256:74bfa7556c90bfa7da0f72c2c6e3320fdde0dc5caa1dd28bb53003a376629a60",
+      "sourceRevision": "7e9adf0c004d87431d46572bdb55ff6ec556604b",
+      "note": "first create"
+    },
+    {
+      "digest": "sha256:0308b1324fc6d2de1e5e8fd23e149861be215c577a3f5ba97f1761e1fd979a2b",
+      "sourceRevision": "c461339f5b54cf722f97f9cd7038ce38297e671e",
+      "note": "failure retention + polled check; ran the drill, rehearsal, restarts"
+    }
+  ],
+  "firstCreate": {
+    "resourceUID": "d1e760f1-2d2c-404f-8365-2d643d36ebed",
+    "dropletId": 600954837,
+    "ip": "206.189.98.100",
+    "convergeStart": "2026-09-16T06:51:07Z",
+    "firstAnsibleAttemptFailed": "2026-09-16T06:53:20Z",
+    "retryConverged": "2026-09-16T06:55:40Z",
+    "readyGeneration": 1
+  },
+  "drill": {
+    "deletedDropletId": 600954837,
+    "replacementDropletId": 600968621,
+    "replacementIp": "161.35.157.65",
+    "deleteAcceptedAt": "2026-09-16T07:49:33Z",
+    "recoveredAt": "2026-09-16T07:54:54Z",
+    "recoverySeconds": 321,
+    "firstAnsibleAttemptFailed": false,
+    "failureLogsRetained": 0
+  },
+  "sourceRevisions": {
+    "doks": "3f65ed26d4a6d8b0e1e8ada812f13ccad5f941b4",
+    "doks-dev": "c84fd303ae7f27fc038364a39db2704914a2f339",
+    "redis-operator": "e59a5abab935035bf466a5c7159c195337e5c2ee",
+    "green": "215e298eed1f43d85c1549ae441d03ccbf625373",
+    "redis": "ec260f5dd27aa92829011e24d5d8a90e75b0b098",
+    "colors-compute": "7e1c2349388ff2ca8a3da65a0c8cb888315b57f4"
+  },
+  "pins": {
+    "doks launcher": "d246db44c615e40cb1af408664137f43c9b01e8a",
+    "redis-operator launcher": "8030c7f7e1f9f622ba02d315eab463e3a227d8be",
+    "green": "215e298eed1f43d85c1549ae441d03ccbf625373",
+    "redis": "ec260f5dd27aa92829011e24d5d8a90e75b0b098",
+    "colors-compute": "7e1c2349388ff2ca8a3da65a0c8cb888315b57f4"
+  }
+}
