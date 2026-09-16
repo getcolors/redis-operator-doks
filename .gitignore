@@ -1,11 +1,14 @@
-.envrc.private
-.envrc.private.*
-.colors/
-.kube/
-*.tfstate*
-*.tfplan
-*.pem
-*.key
-.terraform/
-.cpcache/
+# Default-deny dotfiles so credentials, generated state, and newly introduced
+# private files cannot be committed accidentally.
+.*
+
+# Safe project metadata explicitly admitted to source control.
+!.envrc
+!.gitignore
+!.nojekyll
+!.agents
+!.claude
+!.github
+
+node_modules/
 __pycache__/

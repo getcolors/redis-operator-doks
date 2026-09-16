@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "package-redis-operator-green": {
+      "source": "getcolors/redis-operator",
+      "sourceType": "github",
+      "skillPath": "skills/package-redis-operator-green/SKILL.md",
+      "computedHash": "1fb3691632c92dcc2901837344fbef86d3f68a55d3c8573cf9161c602af9bba7"
+    }
+  }
+}
