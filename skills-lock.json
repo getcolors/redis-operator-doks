@@ -1,11 +1,23 @@
 {
   "version": 1,
   "skills": {
+    "package-redis-operator-blue": {
+      "source": "getcolors/redis-operator",
+      "sourceType": "github",
+      "skillPath": "skills/package-redis-operator-blue/SKILL.md",
+      "computedHash": "dc952a6ff3584b05587177acf2b5d8366f0034f4c151c6c7f11d29d4bed81792"
+    },
     "package-redis-operator-green": {
       "source": "getcolors/redis-operator",
       "sourceType": "github",
       "skillPath": "skills/package-redis-operator-green/SKILL.md",
-      "computedHash": "1a6e1a2cbceb9a1299dc4995afd9542ebf408faedb688c7826f2c4450dad1724"
+      "computedHash": "f8782d7142b80d1511ba342d211f3fbfecfd1642b35665db2cc9f14c7e3c65ea"
+    },
+    "package-redis-operator-red": {
+      "source": "getcolors/redis-operator",
+      "sourceType": "github",
+      "skillPath": "skills/package-redis-operator-red/SKILL.md",
+      "computedHash": "4d3e86ef2f8199a8b6582dcf32b80df7f36ef70db996c046eff0112a0cd079af"
     }
   }
 }

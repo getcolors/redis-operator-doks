@@ -1,0 +1,17 @@
+{
+  "passed" : true,
+  "resourceUID" : "e92793d1-546f-4779-86a8-d0405649c755",
+  "result" : {
+    "convergenceRecordModifiedMs" : 1789571858626,
+    "ip" : "146.190.229.253",
+    "name" : "redis-operator-doks",
+    "profile" : "redis-operator-doks",
+    "providerId" : "601089393",
+    "rehearsalPassed" : true
+  },
+  "resumedAt" : "2026-09-16T15:18:43.874Z",
+  "resumedGeneration" : 5,
+  "startedAt" : "2026-09-16T15:17:48.885Z",
+  "suspendedGeneration" : 4,
+  "suspensionAcknowledgedAt" : "2026-09-16T15:17:52.300Z"
+}

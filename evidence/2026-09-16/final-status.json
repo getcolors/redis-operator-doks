@@ -1,0 +1,18 @@
+{
+  "resource": {
+    "name": "redis-operator-doks",
+    "uid": "e92793d1-546f-4779-86a8-d0405649c755",
+    "generation": 5,
+    "phase": "Ready",
+    "observedGeneration": 5,
+    "suspend": false,
+    "lastReconcileTime": "2026-09-16T15:27:54.964Z"
+  },
+  "controller": {
+    "pod": "colors-redis-operator-7db69b5cdb-rt7n6",
+    "uid": "46c697d9-db2f-47cb-b073-f19243d9fce5",
+    "startTime": "2026-09-16T15:19:13Z",
+    "image": "registry.digitalocean.com/doks-dev/redis-operator-red@sha256:8d53eb6932dddc3e9b512545ae02f7123f54acbc0d0d3346d7bd8331c21f3d8c",
+    "restarts": 0
+  }
+}

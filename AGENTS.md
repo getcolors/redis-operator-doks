@@ -35,9 +35,10 @@ launcher.
 
 ## The launcher is a copy
 
-`./green` is a copy of `.agents/skills/package-redis-operator-green/green`.
-After `npx skills update -p`, copy it again and compare; `skills-lock.json`
-records the installed pin.
+The `green`, `red` and `blue` launchers are copies of the matching files in
+`.agents/skills/package-redis-operator-<colour>/`. After `npx skills update -p`,
+copy each launcher again and compare it with its payload. `skills-lock.json`
+records the installed skills.
 
 ## Safety
 

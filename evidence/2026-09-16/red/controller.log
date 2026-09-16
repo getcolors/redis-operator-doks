@@ -1,0 +1,42 @@
+2026-09-16T15:19:20.093546290Z RedisDeployment controller running
+2026-09-16T15:19:39.181293098Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=601089393
+2026-09-16T15:19:45.706433906Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=601089393
+2026-09-16T15:20:34.580357255Z redis profile=redis-operator-doks observe exists=true matches=false ready=false reason=unhealthy provider-id=601089393
+2026-09-16T15:20:34.585454297Z >>> redis/start (create)
+2026-09-16T15:20:34.588303628Z <<< redis/start (3ms)
+2026-09-16T15:20:34.590276325Z >>> redis/infrastructure (create)
+2026-09-16T15:21:04.244594515Z >>> colors-compute/fan-out (create)
+2026-09-16T15:21:04.244627173Z <<< colors-compute/fan-out (0ms)
+2026-09-16T15:21:04.245352778Z >>> colors-compute/node (create)
+2026-09-16T15:21:48.810966031Z <<< colors-compute/node (44565ms)
+2026-09-16T15:21:48.811620259Z >>> colors-compute/join (create)
+2026-09-16T15:21:48.812098680Z <<< colors-compute/join (0ms)
+2026-09-16T15:21:51.034540231Z <<< redis/infrastructure (76445ms)
+2026-09-16T15:21:51.035383939Z >>> redis/ssh-config (create)
+2026-09-16T15:21:53.245918774Z <<< redis/ssh-config (2210ms)
+2026-09-16T15:21:53.246606844Z >>> redis/ansible (create)
+2026-09-16T15:23:15.654658056Z <<< redis/ansible (82408ms)
+2026-09-16T15:23:15.657516079Z redis converge outcome=failed retained=20260916T152315656Z-redis-ansible.log
+2026-09-16T15:23:25.601314478Z redis profile=redis-operator-doks observe exists=true matches=false ready=false reason=unhealthy provider-id=601094147
+2026-09-16T15:23:25.601350839Z >>> redis/start (create)
+2026-09-16T15:23:25.602009986Z <<< redis/start (1ms)
+2026-09-16T15:23:25.602664949Z >>> redis/infrastructure (create)
+2026-09-16T15:23:54.028334574Z >>> colors-compute/fan-out (create)
+2026-09-16T15:23:54.028361406Z <<< colors-compute/fan-out (0ms)
+2026-09-16T15:23:54.028997844Z >>> colors-compute/node (create)
+2026-09-16T15:24:06.990524952Z <<< colors-compute/node (12962ms)
+2026-09-16T15:24:06.991644260Z >>> colors-compute/join (create)
+2026-09-16T15:24:06.991981209Z <<< colors-compute/join (0ms)
+2026-09-16T15:24:09.273211007Z <<< redis/infrastructure (43662ms)
+2026-09-16T15:24:09.273253231Z >>> redis/ssh-config (create)
+2026-09-16T15:24:11.543943266Z <<< redis/ssh-config (2270ms)
+2026-09-16T15:24:11.543972987Z >>> redis/ansible (create)
+2026-09-16T15:26:03.974537011Z <<< redis/ansible (112438ms)
+2026-09-16T15:26:03.975649873Z >>> redis/acceptance (create)
+2026-09-16T15:26:09.959148897Z <<< redis/acceptance (5983ms)
+2026-09-16T15:26:16.429386650Z redis converge outcome=converged provider-id=601094147
+2026-09-16T15:26:23.262364181Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=601094147
+2026-09-16T15:27:02.886685449Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=601094147
+2026-09-16T15:27:09.756078743Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=601094147
+2026-09-16T15:27:48.888178368Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=601094147
+2026-09-16T15:27:54.964682745Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=601094147

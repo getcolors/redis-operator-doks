@@ -1,0 +1,9 @@
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-mcndrkki/.venv
+Installed 10 packages in 4ms
+>>> redis-operator/start (create)
+<<< redis-operator/start (1ms)
+>>> redis-operator/render (create)
+<<< redis-operator/render (12ms)
+>>> redis-operator/create (create)
+<<< redis-operator/create (355783ms)

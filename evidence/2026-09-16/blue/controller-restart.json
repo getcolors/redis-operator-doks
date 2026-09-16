@@ -1,0 +1,29 @@
+{
+  "after" : {
+    "convergenceRecordModifiedMs" : 1789571327266,
+    "healthy" : true,
+    "ip" : "146.190.229.253",
+    "name" : "redis-operator-doks",
+    "profile" : "redis-operator-doks",
+    "providerId" : "601089393"
+  },
+  "before" : {
+    "convergenceRecordModifiedMs" : 1789571327266,
+    "healthy" : true,
+    "ip" : "146.190.229.253",
+    "name" : "redis-operator-doks",
+    "profile" : "redis-operator-doks",
+    "providerId" : "601089393"
+  },
+  "completedAt" : "2026-09-16T15:14:23.038182Z",
+  "generation" : 3,
+  "lastReconcileTimeAfter" : "2026-09-16T15:14:05.458Z",
+  "lastReconcileTimeBefore" : "2026-09-16T15:13:14.917Z",
+  "newPod" : "colors-redis-operator-5d464f55f9-2949h",
+  "newPodStartTime" : "2026-09-16T15:13:34Z",
+  "oldPod" : "colors-redis-operator-5d464f55f9-nvfhc",
+  "passed" : true,
+  "resourceUID" : "e92793d1-546f-4779-86a8-d0405649c755",
+  "startedAt" : "2026-09-16T15:13:28.499596Z",
+  "stoppedAt" : "2026-09-16T15:13:34.044132Z"
+}

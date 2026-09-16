@@ -1,0 +1,51 @@
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-yxvmjat9/.venv
+   Updating https://github.com/getcolors/redis-operator.git (8251d68edef252902f32da68d4b46ec19e9a760f)
+    Updated https://github.com/getcolors/redis-operator.git (8251d68edef252902f32da68d4b46ec19e9a760f)
+   Building package-redis-operator-blue @ git+https://github.com/getcolors/redis-operator.git@8251d68edef252902f32da68d4b46ec19e9a760f#subdirectory=blue
+      Built package-redis-operator-blue @ git+https://github.com/getcolors/redis-operator.git@8251d68edef252902f32da68d4b46ec19e9a760f#subdirectory=blue
+Installed 10 packages in 5ms
+>>> redis-operator/start (build)
+<<< redis-operator/start (1ms)
+>>> redis-operator/render (build)
+<<< redis-operator/render (12ms)
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-zv4lrrv_/.venv
+Installed 10 packages in 5ms
+>>> redis-operator/start (create)
+<<< redis-operator/start (1ms)
+>>> redis-operator/render (create)
+<<< redis-operator/render (12ms)
+dry-run: would run redis-operator/create (create)
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-ysyynt79/.venv
+Installed 10 packages in 4ms
+>>> redis-operator/start (create)
+<<< redis-operator/start (1ms)
+>>> redis-operator/render (create)
+<<< redis-operator/render (12ms)
+>>> redis-operator/create (create)
+<<< redis-operator/create (16613ms)
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-niyhzv6h/.venv
+Installed 10 packages in 5ms
+>>> redis-operator/start (check)
+<<< redis-operator/start (1ms)
+>>> redis-operator/check (check)
+check {'providerId': '601089393', 'name': 'redis-operator-doks', 'ip': '146.190.229.253', 'profile': 'redis-operator-doks', 'convergenceRecordModifiedMs': 1789571327266, 'healthy': True}
+failures retained: 0
+<<< redis-operator/check (11283ms)
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-13_j1eg2/.venv
+Installed 10 packages in 6ms
+>>> redis-operator/start (rehearse)
+<<< redis-operator/start (1ms)
+>>> redis-operator/rehearse (rehearse)
+<<< redis-operator/rehearse (81406ms)
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-q6pu70nf/.venv
+Installed 10 packages in 4ms
+>>> redis-operator/start (restart)
+<<< redis-operator/start (1ms)
+>>> redis-operator/restart (restart)
+<<< redis-operator/restart (63074ms)

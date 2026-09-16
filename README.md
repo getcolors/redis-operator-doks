@@ -5,7 +5,11 @@ Package Skill installed in the sibling [`doks-dev`](https://github.com/getcolors
 cluster. The controller runs in namespace `colors-redis` and manages one Redis
 7.2 Droplet (`s-1vcpu-2gb`, `ams3`, loopback only, reached over SSH) whose
 compute state lives in the `redis-state` bucket and whose RDB backup sets go to
-`redis-backup`. `colors.yml` is the only file to edit.
+`redis-backup`. `colors.yml` is the only desired-state file to edit.
+
+The installed `./green`, `./red` and `./blue` launchers support the same verbs.
+They share the custom resource and remote state. Each can operate a Green,
+Red or Blue controller image; the image digest selects the controller runtime.
 
 ```sh
 direnv allow                 # once; loads devenv, the five credentials, and KUBECONFIG
@@ -30,6 +34,6 @@ Credentials live only in the gitignored `.envrc.private`: `COLORS_PAR_DO_TOKEN`,
 `COLORS_PAR_REDIS_BACKUP_R2_ACCESS_KEY_ID`, `COLORS_PAR_REDIS_BACKUP_R2_SECRET_ACCESS_KEY`.
 Never export `COLORS_PAR_PROFILE`.
 
-See `HANDOFF.md` for the latest verified state and evidence, `PLAN.md` for the
-plan this repository executed, and `history/2026-09-15/` for the previous
-script-driven deployment (`redis-doks`).
+See [port verification](evidence/2026-09-16/verification.md) for the live test
+results and the [workspace handoff](https://github.com/getcolors/workspace/blob/main/kubernetes-ports-handoff.md)
+for source revisions, image digests and the current deployment.

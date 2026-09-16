@@ -1,0 +1,73 @@
+red: resolving dependencies (first run)
+>>> redis-operator/start (build)
+<<< redis-operator/start (3ms)
+>>> redis-operator/render (build)
+<<< redis-operator/render (3ms)
+>>> redis-operator/start (create)
+<<< redis-operator/start (2ms)
+>>> redis-operator/render (create)
+<<< redis-operator/render (4ms)
+dry-run: would run redis-operator/create (create)
+>>> redis-operator/start (create)
+<<< redis-operator/start (2ms)
+>>> redis-operator/render (create)
+<<< redis-operator/render (4ms)
+>>> redis-operator/create (create)
+<<< redis-operator/create (3301ms)
+>>> redis-operator/start (check)
+<<< redis-operator/start (2ms)
+>>> redis-operator/check (check)
+check {
+  providerId: "601089393",
+  name: "redis-operator-doks",
+  ip: "146.190.229.253",
+  profile: "redis-operator-doks",
+  convergenceRecordModifiedMs: 0,
+  healthy: true,
+}
+failures retained: 0
+<<< redis-operator/check (10304ms)
+Checking out: https://github.com/getcolors/redis-operator.git at 8251d68edef252902f32da68d4b46ec19e9a760f
+>>> :redis-operator/start (check)
+<<< :redis-operator/start (0ms)
+>>> :redis-operator/check (check)
+redis-operator: waiting phase=Ready reason=Converged generation=3 observed=3
+redis-operator: controller up pod=colors-redis-operator-7db69b5cdb-vvmbt started=2026-09-16T15:14:55Z
+redis-operator: check phase=Ready reason=Converged generation=3 observed=3
+redis-operator: check provider-id=601089393 name=redis-operator-doks ip=146.190.229.253 profile=redis-operator-doks healthy=true
+redis-operator: check failures retained: 0 
+<<< :redis-operator/check (8544ms)
+Using CPython 3.12.3 interpreter at: /usr/bin/python3
+Creating virtual environment at: /tmp/redis-operator-blue-cfptwdxn/.venv
+Installed 10 packages in 5ms
+>>> redis-operator/start (check)
+<<< redis-operator/start (1ms)
+>>> redis-operator/check (check)
+check {'providerId': '601089393', 'name': 'redis-operator-doks', 'ip': '146.190.229.253', 'profile': 'redis-operator-doks', 'convergenceRecordModifiedMs': 0, 'healthy': True}
+failures retained: 0
+<<< redis-operator/check (8972ms)
+>>> redis-operator/start (rehearse)
+<<< redis-operator/start (2ms)
+>>> redis-operator/rehearse (rehearse)
+<<< redis-operator/rehearse (209824ms)
+>>> redis-operator/start (restart)
+<<< redis-operator/start (2ms)
+>>> redis-operator/restart (restart)
+<<< redis-operator/restart (59959ms)
+>>> redis-operator/start (drill)
+<<< redis-operator/start (2ms)
+>>> redis-operator/drill (drill)
+<<< redis-operator/drill (416002ms)
+>>> redis-operator/start (check)
+<<< redis-operator/start (2ms)
+>>> redis-operator/check (check)
+check {
+  providerId: "601094147",
+  name: "redis-operator-doks",
+  ip: "146.190.24.194",
+  profile: "redis-operator-doks",
+  convergenceRecordModifiedMs: 1789572376422,
+  healthy: true,
+}
+failures retained: 1
+<<< redis-operator/check (22841ms)

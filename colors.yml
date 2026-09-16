@@ -8,12 +8,12 @@ profile: redis-operator-doks
 workdir: .colors
 kube-context: do-ams3-doks-dev
 namespace: colors-redis
-image: registry.digitalocean.com/doks-dev/redis-operator@sha256:0308b1324fc6d2de1e5e8fd23e149861be215c577a3f5ba97f1761e1fd979a2b
+image: registry.digitalocean.com/doks-dev/redis-operator-red@sha256:8d53eb6932dddc3e9b512545ae02f7123f54acbc0d0d3346d7bd8331c21f3d8c
 image-pull-secret: doks-dev
 reconcile-interval: 30s
 deletion-policy: Retain
 compute-prevent-destroy: true
-doks-cluster-id: 2e927b38-90a5-4d73-98af-d974f9fe9fd1
+doks-cluster-id: be709b80-df9d-4bf0-8d6b-5333c650d9a6
 provider-compute: digitalocean
 provider-backend: r2
 redis-image: docker.io/library/redis:7.2.16@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b
@@ -28,6 +28,6 @@ digitalocean-region: ams3
 digitalocean-size: s-1vcpu-2gb
 digitalocean-image: ubuntu-24-04-x64
 # The DOKS worker (the controller's egress) and the developer workstation.
-digitalocean-ssh-sources: [134.209.92.109/32, 89.168.97.254/32]
+digitalocean-ssh-sources: [159.223.1.98/32, 89.168.97.254/32]
 r2-bucket: redis-state
 r2-endpoint: https://319271fed8bc6d2d9059362be1165f37.eu.r2.cloudflarestorage.com
