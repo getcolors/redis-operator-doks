@@ -1,0 +1,7 @@
+redis-operator: waiting phase=Ready reason=Converged generation=3 observed=3
+redis-operator: restart scaled to zero; waiting for the old controller to stop
+redis-operator: restart phase=Ready reason=Converged generation=3 observed=3 lastReconcileTime=2026-09-16T07:57:01.507Z
+kubectl exec deployment/colors-redis-operator failed (exit 1): Clojure tools not yet in expected location: /root/.deps.clj/1.12.4.1618/ClojureTools/clojure-tools-1.12.4.1618.jar
+Unzipping /root/.deps.clj/1.12.4.1618/ClojureTools/clojure-tools.zip ...
+Exception in thread "main" java.io.EOFException: Unexpected end of ZLIB input stream
+command terminated with exit code 1

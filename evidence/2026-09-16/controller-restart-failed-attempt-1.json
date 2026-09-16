@@ -1,0 +1,17 @@
+{
+  "before" : {
+    "convergenceRecordModifiedMs" : 1789545247540,
+    "healthy" : true,
+    "ip" : "161.35.157.65",
+    "name" : "redis-operator-doks",
+    "profile" : "redis-operator-doks",
+    "providerId" : "600968621"
+  },
+  "generation" : 3,
+  "lastReconcileTimeBefore" : "2026-09-16T07:56:17.012Z",
+  "passed" : false,
+  "resourceUID" : "d1e760f1-2d2c-404f-8365-2d643d36ebed",
+  "rolledOutAt" : "2026-09-16T07:57:07.438972457Z",
+  "startedAt" : "2026-09-16T07:56:52.518627952Z",
+  "stoppedAt" : "2026-09-16T07:57:03.077453843Z"
+}

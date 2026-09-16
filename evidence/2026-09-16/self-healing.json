@@ -1,0 +1,31 @@
+{
+  "after" : {
+    "convergenceRecordModifiedMs" : 1789545247540,
+    "healthy" : true,
+    "ip" : "161.35.157.65",
+    "name" : "redis-operator-doks",
+    "profile" : "redis-operator-doks",
+    "providerId" : "600968621"
+  },
+  "authenticatedWriteReadPassed" : true,
+  "before" : {
+    "convergenceRecordModifiedMs" : 1789541740083,
+    "healthy" : true,
+    "ip" : "206.189.98.100",
+    "name" : "redis-operator-doks",
+    "profile" : "redis-operator-doks",
+    "providerId" : "600954837"
+  },
+  "clusterId" : "2e927b38-90a5-4d73-98af-d974f9fe9fd1",
+  "deleteAcceptedAt" : "2026-09-16T07:49:33.528627435Z",
+  "excludedWorkerIds" : [ "600945297" ],
+  "expectedDataRecovery" : false,
+  "generation" : 1,
+  "markerKey" : "colors:self-heal:30b07951ecbb4191827325f2dc2bf52a",
+  "markerValue" : "3dcd2654bbe74d619ffee3307506c8f4",
+  "passed" : true,
+  "priorMarkerSurvived" : false,
+  "recoveredAt" : "2026-09-16T07:54:54.618100613Z",
+  "resourceUID" : "d1e760f1-2d2c-404f-8365-2d643d36ebed",
+  "startedAt" : "2026-09-16T07:49:32.589212908Z"
+}

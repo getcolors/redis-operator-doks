@@ -1,0 +1,13 @@
+2026-09-16T06:51:07.309921289Z redis profile=redis-operator-doks observe exists=false matches=false ready=false reason=absent provider-id=none
+2026-09-16T06:51:07.310100554Z redis profile=redis-operator-doks converge start
+2026-09-16T06:53:20.908193799Z redis profile=redis-operator-doks converge outcome=failed step=:redis/ansible exit=2
+2026-09-16T06:53:30.328034714Z redis profile=redis-operator-doks observe exists=true matches=false ready=false reason=unhealthy provider-id=600954837
+2026-09-16T06:53:30.328077932Z redis profile=redis-operator-doks converge start
+2026-09-16T06:55:40.085900849Z redis profile=redis-operator-doks converge outcome=converged provider-id=600954837
+2026-09-16T06:55:46.007107970Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=600954837
+2026-09-16T06:56:22.744752275Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=600954837
+2026-09-16T06:56:28.564446686Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=600954837
+2026-09-16T06:57:07.126861184Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=600954837
+2026-09-16T06:57:13.173586890Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=600954837
+2026-09-16T06:57:50.854023505Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=600954837
+2026-09-16T06:57:56.259574705Z redis profile=redis-operator-doks observe exists=true matches=true ready=true reason=converged provider-id=600954837
