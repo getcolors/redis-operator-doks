@@ -8,7 +8,7 @@ profile: redis-operator-doks
 workdir: .colors
 kube-context: do-ams3-doks-dev
 namespace: colors-redis
-image: registry.digitalocean.com/doks-dev/redis-operator@sha256:74bfa7556c90bfa7da0f72c2c6e3320fdde0dc5caa1dd28bb53003a376629a60
+image: registry.digitalocean.com/doks-dev/redis-operator@sha256:0308b1324fc6d2de1e5e8fd23e149861be215c577a3f5ba97f1761e1fd979a2b
 image-pull-secret: doks-dev
 reconcile-interval: 30s
 deletion-policy: Retain
