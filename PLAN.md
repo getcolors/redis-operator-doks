@@ -1,99 +1,98 @@
-# Redis operator on DOKS
+# Plan: doks and redis-operator become Package Skills
+
+Date: 2026-09-16. Follows the audit in
+`workspace/reports/redis-doks-audit-2026-09-16/` and the assessment that
+preceded it. Everything in this plan is executed autonomously; the decisions
+below are the recommended options from that assessment.
 
 ## Goal
 
-Run `green.kubernetes` in a new DigitalOcean Kubernetes cluster. The operator
-reuses the existing Redis package to provision Redis on a separate Droplet.
-Delete only that task-owned Droplet through the DigitalOcean API and verify
-that the operator detects its absence and restores a healthy Redis service.
-
-## Repositories
-
-- `getcolors/doks`: reusable Green workflow for DOKS provisioning.
-- `getcolors/doks-dev`: private configuration for the development cluster.
-- `getcolors/redis-operator`: RedisDeployment CRD, Clojure controller adapter,
-  image build, and installation workflow. Pins Green and Redis.
-- `getcolors/redis-doks`: private operator/deployment configuration, live test,
-  evidence, this plan, and the final handoff.
-- Reuse `green`, `redis`, and `colors-compute`. Change existing libraries only
-  when required by the integration and verify any changes independently.
+Turn `doks` into a conforming Green Package Skill built on colors-compute's
+`managed-kubernetes` kind, and split `redis-doks` into the Package Skill
+`redis-operator` (the existing controller repository gains a payload) and
+the deployment `redis-operator-doks` (this repository, renamed from
+`redis-doks`). Verify both with live deployments, then tear them down.
 
 ## Decisions
 
-- One DOKS worker for this development test, in an available European region.
-  Choose a currently supported Kubernetes version and a worker with enough RAM
-  for the controller, its toolchain, and infrastructure operations.
-- Redis runs on a dedicated small DigitalOcean Droplet. Its Redis port stays
-  bound to loopback; the controller configures and checks it over SSH.
-- R2 buckets are `doks-state`, `redis-state`, and `redis-backup`. Use separate
-  credential sets from the workspace's private environment file. Never commit
-  credentials, kubeconfigs, Terraform state, SSH private keys, or registry tokens.
-- Use remote infrastructure state and a persistent controller volume for SSH
-  keys and generated workflow files. Dependency caches are downloaded again
-  when a new pod starts. Restart the controller gracefully;
-  no distributed failover or forced takeover of an uncertain workflow.
-- The CRD exposes `deletionPolicy`, defaulting to Retain. Package destruction
-  protection stays enabled during convergence. Only an explicit Destroy deletion
-  permits the adapter's deletion callback to lift the package's workflow guard.
-  It does not enable automatic destructive replacement of existing infrastructure.
-- Provision and heal with direct Green workflow calls, not package skill/CLI Jobs.
-- Observation must distinguish API/state errors from confirmed Droplet absence,
-  and must check Redis health. An unknown error must never cause blind recreation.
-- Pin source revisions and the deployed image. Build locally; publish the image
-  through an authenticated registry available to DOKS.
+- **Names.** Skill `doks`, deployment `doks-dev` (existing). Skill
+  `redis-operator` (existing repository), deployment `redis-operator-doks`
+  (GitHub rename of `redis-doks`, history and evidence kept under
+  `history/2026-09-15/`).
+- **Colour.** Green only. `green.kubernetes` exists in no other colour, so
+  there is no parity suite; `bb golden` and `scripts/launcher.sh` are the nets.
+- **doks is a colors-compute consumer.** It calls `plan-managed-kubernetes`,
+  `managed-kubernetes` and `read-managed-kubernetes` as `agent-network-doks`
+  does. DigitalOcean and Vultr are advertised from birth because the library
+  recipes exist for both. The cluster is named after the profile
+  (Compute Name Standard); the backend uses `provider-backend: r2`,
+  `r2-bucket`, `r2-endpoint` and `COLORS_PAR_R2_*`. The hand-rolled tofu
+  runner, the `cluster-name` key, the `doks-state-r2-*` keys and the
+  `<profile>/cluster.tfstate` key all go away.
+- **doks owns an optional registry.** `digitalocean-registry-tier` present
+  means the deployment owns a profile-named DigitalOcean container registry
+  with a rotated read-only pull credential, integrated with the cluster so
+  DOKS injects the pull Secret into every namespace, plus a `registry` verb
+  that writes a short-lived push docker config under `.colors/`. Absent means
+  no registry. On Vultr the key is a validation error. Modelled on
+  `agent-network-doks`'s registry templates.
+- **Verbs.** doks: `build`, `create`, `check`, `kubeconfig`, `registry`,
+  `delete`. redis-operator: `build`, `create`, `check`, `rehearse`, `drill`,
+  `restart`, `delete`. `drill` is the Droplet-deletion recovery test; it runs
+  only with `COLORS_PAR_DRILL_DELETE_OWNED_DROPLET=true` for one run and
+  keeps every ownership check the Python script had. `delete` is guarded by
+  `compute-prevent-destroy`; lifting it patches the policy to Destroy and
+  waits for the finalizer before removing the namespace.
+- **The Python goes away.** Installer, drills and the private-env parser are
+  ported to tested Clojure in the package. Credentials come from the five
+  `COLORS_PAR_*` variables green already reads; nothing parses
+  `.envrc.private`. Manifests come from the pinned library, never from a
+  working tree. `redis.yml` is dropped; the custom resource is rendered from
+  `colors.yml` at build.
+- **Pins.** colors-compute moves to 7e1c234 in both packages (the reviewed
+  repair for interrupted operations). green stays at 215e298, redis at
+  ec260f5. Real pushed SHAs only, stamped by `bb pin`.
+- **Audit fixes taken in passing.** Termination grace above the workflow
+  caps; `create` refuses to un-suspend a suspended resource; one log line
+  per reconcile outcome in the adapter; tofu output no longer swallowed
+  (the library reports it). Not in scope: the token-relative 404, the
+  unexplained Droplet 600730033 (now documented as an open item), controller
+  probes.
+- **Image.** Built for amd64 from the redis-operator repository at its pinned
+  SHA and pushed to the doks-owned registry with the `registry` verb's push
+  config; the deployment pins the digest in `colors.yml`.
+- **End state.** Full lifecycle proven: create, check, drill, rehearse,
+  restart, delete, for both deployments. Nothing billable remains; R2 state
+  and backup objects are retained.
 
 ## Work
 
-1. Synchronize existing repos, initialize the four repos, and publish this plan.
-2. Verify all credential sets, including temporary-object write/read/delete probes
-   in dedicated test prefixes. Check DigitalOcean permissions and current DOKS
-   versions/sizes without changing existing resources.
-3. Implement/test DOKS provisioning and write development configuration. Create a
-   uniquely named task cluster and save a private kubeconfig outside Git.
-4. Implement/test the Redis operator, ownership checks, observation, remote-state
-   recovery, persistent keys, CRD, credentials wiring, and installation workflow.
-5. Build and install the operator; create a dedicated RedisDeployment. Wait for
-   provider, SSH, Redis authentication, and backup acceptance checks to pass.
-6. Record the original Droplet ID, profile, owner, and health. Confirm it is not
-   a DOKS worker or another deployment. Delete that exact ID through the API.
-7. Verify autonomous replacement with a different Droplet ID, healthy Redis,
-   working authenticated reads/writes, and a healthy custom-resource status.
-   Also verify controller restart with retained keys and state.
-8. Record service recovery separately from data recovery. Write a marker before
-   disruption and report whether it survives. Automatic backup restoration is
-   not assumed from a healthy replacement. Exercise the existing backup rehearsal
-   where practical; do not claim whole-node data recovery without proving it.
-9. Write HANDOFF.md with evidence, exact commands, resource IDs, data behavior,
-   limitations, and cleanup commands. Keep the successful development deployment
-   available for inspection and state its ongoing billable resources explicitly.
-10. Commit and push every changed repository to main, with real pinned SHAs.
+1. Sync every repository; rename `redis-doks`; write this plan; push.
+2. Subagent A: rewrite `doks` as the Package Skill described above
+   (`io.github.getcolors.doks.*` namespaces, payload, launcher check, golden
+   for two providers, pin task, devenv, CI). Push; `bb pin`; push.
+3. Subagent B: add `skills/package-redis-operator-green` to `redis-operator`
+   with the launcher-side namespaces, port the scripts, bump pins, apply the
+   audit fixes, keep the controller image entry point. Push; `bb pin`; push.
+4. Retrofit `doks-dev` and `redis-operator-doks` as conventional deployments:
+   `npx skills add`, root launcher copies, `skills-lock.json`, `devenv.nix`,
+   `.envrc`, per-deployment `.envrc.private`, default-deny `.gitignore`,
+   new `colors.yml`, `CLAUDE.md`, `README.md`.
+5. Live: `doks-dev` create and check; build and push the image; record the
+   digest; `redis-operator-doks` create and check; drill, rehearse, restart;
+   `redis-operator-doks` delete; `doks-dev` delete; confirm the account is
+   empty. Evidence under `evidence/2026-09-16/`.
+6. Update `workspace/CLAUDE.md` and `repositories.json` with the four
+   repositories; commit and push every repository to main.
+7. Write `HANDOFF.md` with results, pins, evidence, open items and cleanup.
 
 ## Acceptance
 
-- All four repositories have runnable code/configuration and documentation.
-- The live Redis controller executes on DOKS, while Redis executes on a Droplet.
-- The deletion test proves ownership before DELETE and never targets shared or
-  pre-existing infrastructure.
-- The operator heals confirmed Droplet loss without a manual create command or
-  a Kubernetes desired-state change.
-- Tests and evidence distinguish service recovery, backup integrity, and data loss.
-- Secrets stay private. The plan and handoff links are shared with the user.
-
-## Progress
-
-- Existing Green, Redis, and colors-compute repositories synchronized to main.
-- Four new repositories created; deployment repositories are private.
-- All four repositories implemented, tested, committed, and pushed to main.
-- All three R2 credential sets passed temporary-object write/read/delete checks.
-- DOKS cluster provisioned and verified; the pinned image passed native AMD64 tests.
-- Redis provisioned from the controller, then its owned Droplet was deleted by API.
-- Autonomous replacement passed in 5 minutes 46 seconds without changing the resource.
-  Authenticated reads/writes passed; the pre-deletion marker was lost as expected.
-- Backup rehearsal and graceful controller restart passed with persisted SSH keys.
-- Final evidence and cleanup instructions are in [HANDOFF.md](HANDOFF.md).
-
-## Subsequent shutdown
-
-On 2026-09-15 the user requested shutdown. The live infrastructure and registry
-were removed, and the three R2 buckets were retained. See
-[evidence/shutdown.json](evidence/shutdown.json) and the updated handoff.
+- `doks` and `redis-operator` pass `bb test`, `bb golden` and
+  `scripts/launcher.sh`; builds and dry runs work from a fresh checkout with
+  no credentials.
+- Both deployments track a payload and a lockfile, and the root launcher
+  equals the payload.
+- The live cycle above completes with the ownership checks intact and the
+  resource UID unchanged across the drill.
+- No secret or generated file is tracked anywhere.
